@@ -6,16 +6,33 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.UUID;
+
+import javax.management.modelmbean.InvalidTargetObjectTypeException;
+
+import br.dev.sidney.tarefas.dao.FuncionarioDAO;
+import br.dev.sidney.tarefas.model.Funcionario;
+import br.dev.sidney.tarefas.ui.FrameFuncionario;
+import br.dev.sidney.tarefas.utils.Utils;
 
 public class Main {
 
 	private static String path = "c:\\Users\\25132876\\ProjetoTarefasDS1TB\\tarefas.txt";
 
 	public static void main(String[] args) {
-
-//		gravarArquivo();
-		lerArquivo();
-
+		
+		new FrameFuncionario();
+		
+		
+//		Funcionario f = new Funcionario();
+//		f.setNome("Priscila Duartes");
+//		f.setCargo("Gerentes de Contas");
+//		f.setSalario(11784.67);
+//		System.out.println();
+//		
+//		
+//		FuncionarioDAO dao = new FuncionarioDAO(f);
+//		dao.gravar();
 	}
 
 	private static void gravarArquivo() {
@@ -52,16 +69,14 @@ public class Main {
 			String linha = br.readLine();
 			while (linha != null) {
 				String registro[] = linha.split(";");
-				System.out.println(" ____________________________________");
-				System.out.println("| Nome:    " + registro[0]);
-				System.out.println("| Tarefa:  " + registro[1]);
-				System.out.println("|____________________________________");
-//				int temp = 0;
-//				int i = 40 - registro[temp].length;
-//				while(40 < i) {
-//					System.out.println(" ");
-//					i++;
-//				}
+				System.out.println(" Nome:    " + registro[0]);
+				System.out.println(" Tarefa:  " + registro[1]);
+				System.out.println(" Data início:  " + registro[2]);
+				System.out.println(" Prazo:  " + registro[3]);
+				System.out.println(" Entrega:  " + registro[4]);
+				System.out.println(" Status:  " + registro[5]);
+				System.out.println();
+
 				linha = br.readLine();
 			}
 
