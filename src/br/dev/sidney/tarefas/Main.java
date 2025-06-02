@@ -6,6 +6,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import javax.management.modelmbean.InvalidTargetObjectTypeException;
@@ -13,6 +15,7 @@ import javax.management.modelmbean.InvalidTargetObjectTypeException;
 import br.dev.sidney.tarefas.dao.FuncionarioDAO;
 import br.dev.sidney.tarefas.model.Funcionario;
 import br.dev.sidney.tarefas.ui.FrameFuncionario;
+import br.dev.sidney.tarefas.ui.FrameFuncionarioList;
 import br.dev.sidney.tarefas.utils.Utils;
 
 public class Main {
@@ -21,8 +24,27 @@ public class Main {
 
 	public static void main(String[] args) {
 		
-		new FrameFuncionario();
+		new FrameFuncionarioList();
 		
+//		List<String> frutas = new ArrayList<String>();
+//		frutas.add("Banana");
+//		frutas.add("Melancia");
+//		frutas.add("Maçã");
+//		frutas.add("Uva");
+//		frutas.add("Ameixa");
+//		frutas.add("Melão");
+//		
+//		System.out.println(frutas);
+		
+//		new FrameFuncionario();
+//		
+//		FuncionarioDAO dao = new FuncionarioDAO();
+//		List<Funcionario> funcionarios = dao.listar();
+//		for (Funcionario f : funcionarios) {
+//			System.out.println(f.getNome());
+//			System.out.println(f.getCargo());
+//			System.out.println("---------");
+//		}
 		
 //		Funcionario f = new Funcionario();
 //		f.setNome("Priscila Duartes");
