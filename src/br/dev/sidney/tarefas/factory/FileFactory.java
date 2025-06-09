@@ -9,11 +9,16 @@ import java.io.IOException;
 public class FileFactory {
 	
 	private String arquivo = "C:\\Users\\25132876\\ProjetoTarefasDS1TB\\funcionarios.csv";
+	private String arquivo2 = "C:\\Users\\25132876\\ProjetoTarefasDS1TB\\tarefas.csv";
 	
 	private FileWriter fw;
 	private BufferedWriter bw;
 	private FileReader fr;
 	private BufferedReader br;
+	private FileWriter fw2;
+	private BufferedWriter bw2;
+	private FileReader fr2;
+	private BufferedReader br2;
 
 	public FileFactory() throws IOException {
 		
@@ -25,6 +30,13 @@ public class FileFactory {
 		//Necessário pra ler no arquivo
 		fr = new FileReader(arquivo);
 		br = new BufferedReader(fr);
+		
+		fw2 = new FileWriter(arquivo2, true);
+		bw2 = new BufferedWriter(fw2);
+		
+		//Necessário pra ler no arquivo
+		fr2 = new FileReader(arquivo2);
+		br2 = new BufferedReader(fr2);
 	}
 	
 	public BufferedWriter getBufferedWriter(){

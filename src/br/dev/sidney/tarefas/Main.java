@@ -16,6 +16,8 @@ import br.dev.sidney.tarefas.dao.FuncionarioDAO;
 import br.dev.sidney.tarefas.model.Funcionario;
 import br.dev.sidney.tarefas.ui.FrameFuncionario;
 import br.dev.sidney.tarefas.ui.FrameFuncionarioList;
+import br.dev.sidney.tarefas.ui.FrameGerenciadorTarefas;
+import br.dev.sidney.tarefas.ui.FrameTarefas;
 import br.dev.sidney.tarefas.utils.Utils;
 
 public class Main {
@@ -24,7 +26,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		
-		new FrameFuncionarioList();
+		new FrameGerenciadorTarefas();
 		
 //		List<String> frutas = new ArrayList<String>();
 //		frutas.add("Banana");
@@ -57,61 +59,61 @@ public class Main {
 //		dao.gravar();
 	}
 
-	private static void gravarArquivo() {
-		FileWriter fw = null;
-		BufferedWriter bw = null;
-		try {
-			fw = new FileWriter(path, true);
-			bw = new BufferedWriter(fw);
-
-			String novaLinha = "Isso é uma nova linha!\n";
-			String novaLinha1 = "Senai Jandira\n";
-			String novaLinha2 = "Turma DS1TB\n";
-
-			bw.write(novaLinha);
-			bw.write(novaLinha1);
-			bw.write(novaLinha2);
-			bw.flush();
-
-		} catch (Exception erro) {
-
-			System.out.println(erro.getMessage());
-		}
-
-	}
-
-	private static void lerArquivo() {
-		FileReader fr = null;
-		BufferedReader br = null;
-
-		try {
-			fr = new FileReader(path);
-			br = new BufferedReader(fr);
-
-			String linha = br.readLine();
-			while (linha != null) {
-				String registro[] = linha.split(";");
-				System.out.println(" Nome:    " + registro[0]);
-				System.out.println(" Tarefa:  " + registro[1]);
-				System.out.println(" Data início:  " + registro[2]);
-				System.out.println(" Prazo:  " + registro[3]);
-				System.out.println(" Entrega:  " + registro[4]);
-				System.out.println(" Status:  " + registro[5]);
-				System.out.println();
-
-				linha = br.readLine();
-			}
-
-		} catch (FileNotFoundException erro) {
-			System.out.println(erro.getMessage());
-
-		} catch (IOException erro) {
-			System.out.println(erro.getMessage());
-
-		} catch (Exception erro) {
-			System.out.println(erro.getMessage());
-
-		}
-	}
+//	private static void gravarArquivo() {
+//		FileWriter fw = null;
+//		BufferedWriter bw = null;
+//		try {
+//			fw = new FileWriter(path, true);
+//			bw = new BufferedWriter(fw);
+//
+//			String novaLinha = "Isso é uma nova linha!\n";
+//			String novaLinha1 = "Senai Jandira\n";
+//			String novaLinha2 = "Turma DS1TB\n";
+//
+//			bw.write(novaLinha);
+//			bw.write(novaLinha1);
+//			bw.write(novaLinha2);
+//			bw.flush();
+//
+//		} catch (Exception erro) {
+//
+//			System.out.println(erro.getMessage());
+//		}
+//
+//	}
+//
+//	private static void lerArquivo() {
+//		FileReader fr = null;
+//		BufferedReader br = null;
+//
+//		try {
+//			fr = new FileReader(path);
+//			br = new BufferedReader(fr);
+//
+//			String linha = br.readLine();
+//			while (linha != null) {
+//				String registro[] = linha.split(";");
+//				System.out.println(" Nome:    " + registro[0]);
+//				System.out.println(" Tarefa:  " + registro[1]);
+//				System.out.println(" Data início:  " + registro[2]);
+//				System.out.println(" Prazo:  " + registro[3]);
+//				System.out.println(" Entrega:  " + registro[4]);
+//				System.out.println(" Status:  " + registro[5]);
+//				System.out.println();
+//
+//				linha = br.readLine();
+//			}
+//
+//		} catch (FileNotFoundException erro) {
+//			System.out.println(erro.getMessage());
+//
+//		} catch (IOException erro) {
+//			System.out.println(erro.getMessage());
+//
+//		} catch (Exception erro) {
+//			System.out.println(erro.getMessage());
+//
+//		}
+//	}
 
 }
