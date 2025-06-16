@@ -45,7 +45,7 @@ public class FrameGerenTarefasList {
 		Container painel = tela.getContentPane();
 		
 		//Criação da Tabela
-		modelTarefas = new DefaultTableModel(colunas, 5) {
+		modelTarefas = new DefaultTableModel(colunas, 6) {
 			@Override
 			public boolean isCellEditable(int row, int column) {
 				return false;
@@ -100,10 +100,10 @@ public class FrameGerenTarefasList {
 		Object[][] dados = new Object[tarefas.size()][3];
 		
 		int i = 0;
-		for (Tarefas f : tarefas) {
-			dados[i][0] = f.getCodigo();
-			dados[i][1] = f.getTitulo();
-			dados[i][2] = f.getDataInc();
+		for (Tarefas t : tarefas) {
+			dados[i][0] = t.getCodigo();
+			dados[i][1] = t.getTitulo();
+			dados[i][2] = t.getDataInc();
 			i++;
 		}
 		

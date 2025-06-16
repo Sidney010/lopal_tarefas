@@ -13,6 +13,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import br.dev.sidney.tarefas.dao.TarefasDAO;
+import br.dev.sidney.tarefas.model.Status;
 import br.dev.sidney.tarefas.model.Tarefas;
 
 
@@ -32,6 +33,8 @@ public class FrameTarefas {
 	
 	private JLabel labelStatus;
 	private JLabel labelResponsavel;
+	private JComboBox cmbStatus;
+	private JComboBox cmbResponsavel;
 	
 	private JButton btnSalvar;
 	private JButton btnSair;
@@ -56,8 +59,7 @@ public class FrameTarefas {
 		labelTitulo.setBounds(10, 10, 200, 30);
 		txtTitulo = new JTextField();
 		txtTitulo.setBounds(10, 40, 150, 30);
-		txtTitulo.setEnabled(false);
-
+		
 		labelDescricao = new JLabel("Descrição: ");
 		labelDescricao.setBounds(10, 75, 200, 30);
 		txtDescricao = new JTextField();
@@ -82,8 +84,14 @@ public class FrameTarefas {
 		
 		labelStatus = new JLabel("Status: ");
 		labelStatus.setBounds(10, 335, 200, 30);
-		//labelStatus = new JTextField();
-		//labelStatus.setBounds(10, 365, 150, 30);
+		JComboBox<Status> cmbStatus = new JComboBox<>(Status.values());
+		cmbStatus.setBounds(10, 365, 150, 30);
+		
+		Status[] status = Status.values();
+		for(Status estadoTarefa : status) {
+			cmbStatus.addItem(estadoTarefa);
+		}
+		Status statusEscolhido = (Status) cmbStatus.getSelectedItem();
 		
 		labelResponsavel = new JLabel("Responsavel: ");
 		labelResponsavel.setBounds(10, 400, 200, 30);
@@ -106,9 +114,12 @@ public class FrameTarefas {
 		painel.add(txtDataConclusao);
 		painel.add(labelDataConclusao);
 		painel.add(labelStatus);
+		painel.add(cmbStatus);
 		painel.add(labelResponsavel);
 		painel.add(btnSalvar);
 		painel.add(btnSair);
+		
+
 		
 		btnSair.addActionListener(new ActionListener() {
 			
@@ -125,23 +136,24 @@ public class FrameTarefas {
 			}
 		});
 		
-//		btnSalvar.addActionListener(new ActionListener() {
-//			
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//				Tarefas f = new Tarefas(
-//						txtTitulo.getText(),
-//						txtDescricao.getText(),
-//						txtDataInc.getText(),
-//						txtPrazo.getText(),
-//						txtDataConclusao.getText(),
-//				
-//				TarefasDAO dao = new TarefasDAO(f);
-//				dao.gravar();
-//				JOptionPane.showMessageDialog(tela, txtTitulo.getText() + " gravado com sucesso", "Sucesso !!!", JOptionPane.INFORMATION_MESSAGE);				
-//				limparFormulario();
-//			}
-//		});
+		btnSalvar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Tarefas t = new Tarefas(
+						txtTitulo.getText(),
+						txtDescricao.getText(),
+						txtDataInc.getText(),
+						txtPrazo.getText(),
+						txtDataConclusao.getText(),
+						statusEscolhido.name());
+				
+				TarefasDAO dao = new TarefasDAO(t);
+				dao.gravar();
+				JOptionPane.showMessageDialog(tela, txtTitulo.getText() + " gravado com sucesso", "Sucesso !!!", JOptionPane.INFORMATION_MESSAGE);				
+				limparFormulario();
+			}
+		});
 
 		tela.setVisible(true);
 		
@@ -152,7 +164,7 @@ public class FrameTarefas {
 		txtDataInc.setText(null);
 		txtPrazo.setText(null);
 		txtDataConclusao.setText(null);
-		txtDataConclusao.requestFocus();
+		txtTitulo.requestFocus();
 	}
 	
 }

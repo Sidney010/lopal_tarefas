@@ -2,6 +2,7 @@ package br.dev.sidney.tarefas.dao;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import br.dev.sidney.tarefas.model.Status;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,8 +24,8 @@ public class TarefasDAO {
 	public void gravar() {
 		try {
 			FileFactory ff = new FileFactory();
-			ff.getBufferedWriter().write(tarefas.toString());
-			ff.getBufferedWriter().flush();
+			ff.getBufferedWriter2().write(tarefas.toString());
+			ff.getBufferedWriter2().flush();
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -38,7 +39,7 @@ public class TarefasDAO {
 
 		try {
 			FileFactory ff = new FileFactory();
-			BufferedReader br2 = ff.getBufferedReader();
+			BufferedReader br2 = ff.getBufferedReader2();
 
 			String linha = "";
 
@@ -52,17 +53,17 @@ public class TarefasDAO {
 				if (linha != null) {
 					String tarefasStr[] = linha.split(",");
 
-					// Criando um objeto funcionario
+					// Criando um objeto Tarefas
 					Tarefas tarefas = new Tarefas();
 					tarefas.setCodigo(tarefasStr[0]);
 					tarefas.setTitulo(tarefasStr[1]);
 					tarefas.setDescricao(tarefasStr[2]);
 					tarefas.setDataInc(tarefasStr[3]);
-//					tarefas.setPrazo(tarefasStr[4]);
-//					tarefas.setDataConclusao(tarefasStr[5]);
-//					tarefas.setStatus(tarefasStr[6]));
+					tarefas.setPrazo(tarefasStr[4]);
+					tarefas.setDataConclusao(tarefasStr[5]);
+					tarefas.setStatus(tarefasStr[6]);
 //					tarefas.setFuncionario(tarefasStr[7]));
-
+		
 
 					Tarefas.add(tarefas);
 

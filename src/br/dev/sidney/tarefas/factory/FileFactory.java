@@ -46,4 +46,12 @@ public class FileFactory {
 	public BufferedReader getBufferedReader() {
 		return br;
 	}
+	public BufferedWriter getBufferedWriter2(){
+		return bw2;
+	}
+	
+	public BufferedReader getBufferedReader2() {
+		return br2;
+	}
+	
 }
