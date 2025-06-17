@@ -8,8 +8,13 @@ import java.io.IOException;
 
 public class FileFactory {
 	
+	//Pasta para acessar no senai
 	private String arquivo = "C:\\Users\\25132876\\ProjetoTarefasDS1TB\\funcionarios.csv";
 	private String arquivo2 = "C:\\Users\\25132876\\ProjetoTarefasDS1TB\\tarefas.csv";
+	
+	//Pasta para acessar em minha casa
+//	private String arquivo = "C:\\Users\\araso\\ProjetoTarefasDS1TB\\funcionarios.csv";
+//	private String arquivo2 = "C:\\Users\\araso\\ProjetoTarefasDS1TB\\tarefas.csv";
 	
 	private FileWriter fw;
 	private BufferedWriter bw;

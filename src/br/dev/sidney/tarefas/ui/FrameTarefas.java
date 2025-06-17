@@ -3,9 +3,15 @@ package br.dev.sidney.tarefas.ui;
 import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
+import java.time.temporal.ChronoField;
 import java.util.ArrayList;
 import java.util.List;
 
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
@@ -76,7 +82,7 @@ public class FrameTarefas {
 		txtDataInc.setBounds(10, 170, 200, 30);
 
 
-		labelPrazo = new JLabel("Prazo: ");
+		labelPrazo = new JLabel("Prazo (em dias): ");
 		labelPrazo.setBounds(10, 205, 200, 30);
 		txtPrazo = new JTextField();
 		txtPrazo.setBounds(10, 235, 150, 30);
@@ -85,6 +91,7 @@ public class FrameTarefas {
 		labelDataConclusao.setBounds(10, 270, 200, 30);
 		txtDataConclusao = new JTextField();
 		txtDataConclusao.setBounds(10, 300, 150, 30);
+		txtDataConclusao.setEditable(false);
 		
 		labelStatus = new JLabel("Status: ");
 		labelStatus.setBounds(10, 335, 200, 30);
@@ -131,6 +138,16 @@ public class FrameTarefas {
 		painel.add(btnSair);
 		
 
+		txtDataInc.addFocusListener(new FocusAdapter() {
+		    public void focusLost(FocusEvent e) {
+		        atualizarDataConclusao();
+		    }
+		});
+		txtPrazo.addFocusListener(new FocusAdapter() {
+		    public void focusLost(FocusEvent e) {
+		        atualizarDataConclusao();
+		    }
+		});
 		
 		btnSair.addActionListener(new ActionListener() {
 			
@@ -151,8 +168,20 @@ public class FrameTarefas {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-		        Status statusEscolhido = (Status) cmbStatus.getSelectedItem();
-		        Funcionario funcionarioEscolhido = (Funcionario) cmbResponsavel.getSelectedItem();
+	            // Pegar status e funcionário selecionado
+	            Status statusEscolhido = (Status) cmbStatus.getSelectedItem();
+	            Funcionario funcionarioEscolhido = (Funcionario) cmbResponsavel.getSelectedItem();
+
+	            // Ler data inicial e prazo
+	            String dataInicialStr = txtDataInc.getText();
+	            int prazoDias = Integer.parseInt(txtPrazo.getText());
+
+	            // Converter e somar prazo usando LocalDate
+	            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+	            LocalDate dataInicial = LocalDate.parse(dataInicialStr, formatter);
+	            LocalDate dataConclusao = dataInicial.plusDays(prazoDias);
+	            String dataConclusaoStr = dataConclusao.format(formatter);
+	            txtDataConclusao.setText(dataConclusaoStr);
 
 		        // Criar a tarefa
 		        Tarefas t = new Tarefas(
@@ -176,6 +205,33 @@ public class FrameTarefas {
 		tela.setVisible(true);
 		
 	}
+	private void atualizarDataConclusao() {
+	    String dataInicialStr = txtDataInc.getText().trim();
+	    String prazoStr = txtPrazo.getText().trim();
+
+	    try {
+	        if (dataInicialStr.isEmpty() || prazoStr.isEmpty()) return;
+
+	        int prazoDias = Integer.parseInt(prazoStr);
+
+	        DateTimeFormatter formatter = new DateTimeFormatterBuilder()
+	            .appendValue(ChronoField.DAY_OF_MONTH)
+	            .appendLiteral('/')
+	            .appendValue(ChronoField.MONTH_OF_YEAR)
+	            .appendLiteral('/')
+	            .appendValue(ChronoField.YEAR, 4)
+	            .toFormatter();
+
+	        LocalDate dataInicial = LocalDate.parse(dataInicialStr, formatter);
+	        LocalDate dataConclusao = dataInicial.plusDays(prazoDias);
+	        String dataConclusaoStr = dataConclusao.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+
+	        txtDataConclusao.setText(dataConclusaoStr);
+	    } catch (Exception e) {
+	        txtDataConclusao.setText("Data inválida");
+	    }
+	}
+
 	private void limparFormulario() {
 		txtTitulo.setText(null);
 		txtDescricao.setText(null);

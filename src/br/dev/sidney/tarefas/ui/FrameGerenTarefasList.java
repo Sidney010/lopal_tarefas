@@ -60,9 +60,9 @@ public class FrameGerenTarefasList {
 		
 		
 		btnNovaTarefa = new JButton("Nova Tarefa");
-		btnNovaTarefa.setBounds(10, 380, 100, 40);
+		btnNovaTarefa.setBounds(10, 380, 150, 40);
 		btnSair = new JButton("Sair");
-		btnSair.setBounds(120, 380, 100, 40);
+		btnSair.setBounds(170, 380, 100, 40);
 		
 		btnNovaTarefa.addActionListener(new ActionListener() {
 			
@@ -80,6 +80,7 @@ public class FrameGerenTarefasList {
 			public void actionPerformed(ActionEvent e) {
 
 					tela.dispose();
+
 				
 			}
 		});
