@@ -74,6 +74,7 @@ public class Funcionario {
 		String funcionario = matricula + ", " + nome + ", " + cargo + ", " + salario + "\n";
 		return funcionario;
 
+
 	}
 
 }

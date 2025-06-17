@@ -10,17 +10,17 @@ public class Tarefas {
 	private String prazo;
 	private String dataConclusao;
 	private String status;
-//	private String responsavel;
-//	
+	private String responsavel;
+	
 
-//
-//	public String getResponsavel() {
-//		return responsavel;
-//	}
-//
-//	public void setResponsavel(String responsavel) {
-//		this.responsavel = responsavel;
-//	}
+
+	public String getResponsavel() {
+		return responsavel;
+	}
+
+	public void setResponsavel(String responsavel) {
+		this.responsavel = responsavel;
+	}
 
 	public Tarefas(String titulo, String descricao, String dataInc,  String prazo, String dataConclusao, String status) {
 	    this.codigo = Utils.gerarUUID8();
@@ -78,17 +78,18 @@ public class Tarefas {
 		
 
 	}
-//	public Tarefas(String titulo, String descricao, String dataInc,  String prazo, String dataConclusao, String Status) {
-//		this.codigo = Utils.gerarUUID8();
-//		this.descricao = descricao;
-//		this.titulo = titulo;
-//		this.dataInc = dataInc;
-//		this.prazo = prazo;
-//		this.dataConclusao = dataConclusao;
-//		this.status = status;
-//		
-//
-//	}
+	public Tarefas(String titulo, String descricao, String dataInc,  String prazo, String dataConclusao, String status, String responsavel) {
+		this.codigo = Utils.gerarUUID8();
+		this.descricao = descricao;
+		this.titulo = titulo;
+		this.dataInc = dataInc;
+		this.prazo = prazo;
+		this.dataConclusao = dataConclusao;
+		this.status = status;
+		this.responsavel = responsavel;
+		
+
+	}
 
 	public String getCodigo() {
 		return codigo;
@@ -166,7 +167,7 @@ public class Tarefas {
 	@Override
 	public String toString() {
 
-		String tarefas = codigo + ", " + titulo + ", " + descricao + ", " + dataInc  + ", " + prazo + ", " + dataConclusao + "," + status + "\n";
+		String tarefas = codigo + ", " + titulo + ", " + descricao + ", " + dataInc  + ", " + prazo + ", " + dataConclusao + "," + status + "," + responsavel + "\n";
 		return tarefas;
 
 	}

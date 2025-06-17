@@ -62,7 +62,7 @@ public class TarefasDAO {
 					tarefas.setPrazo(tarefasStr[4]);
 					tarefas.setDataConclusao(tarefasStr[5]);
 					tarefas.setStatus(tarefasStr[6]);
-//					tarefas.setFuncionario(tarefasStr[7]));
+					tarefas.setResponsavel(tarefasStr[7]);
 		
 
 					Tarefas.add(tarefas);

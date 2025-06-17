@@ -3,6 +3,8 @@ package br.dev.sidney.tarefas.ui;
 import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -12,7 +14,9 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
+import br.dev.sidney.tarefas.dao.FuncionarioDAO;
 import br.dev.sidney.tarefas.dao.TarefasDAO;
+import br.dev.sidney.tarefas.model.Funcionario;
 import br.dev.sidney.tarefas.model.Status;
 import br.dev.sidney.tarefas.model.Tarefas;
 
@@ -84,19 +88,25 @@ public class FrameTarefas {
 		
 		labelStatus = new JLabel("Status: ");
 		labelStatus.setBounds(10, 335, 200, 30);
-		JComboBox<Status> cmbStatus = new JComboBox<>(Status.values());
+        cmbStatus = new JComboBox<Status>(Status.values());
 		cmbStatus.setBounds(10, 365, 150, 30);
 		
-		Status[] status = Status.values();
-		for(Status estadoTarefa : status) {
-			cmbStatus.addItem(estadoTarefa);
-		}
-		Status statusEscolhido = (Status) cmbStatus.getSelectedItem();
+//		Status[] status = Status.values();
+//		for(Status estadoTarefa : status) {
+//			cmbStatus.addItem(estadoTarefa);
+//		}
+//		Status statusEscolhido = (Status) cmbStatus.getSelectedItem();
+//		List<Funcionario> funcionarios = new ArrayList<Funcionario>();
+//		Funcionario funcionarioEscolhido = (Funcionario) cmbResponsavel.getSelectedItem();
+//		
+		FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
+		List<Funcionario> funcionarios = funcionarioDAO.listar();
+
 		
 		labelResponsavel = new JLabel("Responsavel: ");
 		labelResponsavel.setBounds(10, 400, 200, 30);
-		//labelStatus = new JTextField();
-		//labelStatus.setBounds(10, 430, 150, 30);
+		cmbResponsavel = new JComboBox<Funcionario>(funcionarios.toArray(new Funcionario[0]));
+		cmbResponsavel.setBounds(10, 430, 300, 30);
 		
 		btnSalvar = new JButton("Salvar");
 		btnSalvar.setBounds(10, 495, 120, 50);
@@ -115,6 +125,7 @@ public class FrameTarefas {
 		painel.add(labelDataConclusao);
 		painel.add(labelStatus);
 		painel.add(cmbStatus);
+		painel.add(cmbResponsavel);
 		painel.add(labelResponsavel);
 		painel.add(btnSalvar);
 		painel.add(btnSair);
@@ -140,18 +151,25 @@ public class FrameTarefas {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Tarefas t = new Tarefas(
-						txtTitulo.getText(),
-						txtDescricao.getText(),
-						txtDataInc.getText(),
-						txtPrazo.getText(),
-						txtDataConclusao.getText(),
-						statusEscolhido.name());
-				
-				TarefasDAO dao = new TarefasDAO(t);
-				dao.gravar();
-				JOptionPane.showMessageDialog(tela, txtTitulo.getText() + " gravado com sucesso", "Sucesso !!!", JOptionPane.INFORMATION_MESSAGE);				
-				limparFormulario();
+		        Status statusEscolhido = (Status) cmbStatus.getSelectedItem();
+		        Funcionario funcionarioEscolhido = (Funcionario) cmbResponsavel.getSelectedItem();
+
+		        // Criar a tarefa
+		        Tarefas t = new Tarefas(
+		            txtTitulo.getText(),
+		            txtDescricao.getText(),
+		            txtDataInc.getText(),
+		            txtPrazo.getText(),
+		            txtDataConclusao.getText(),
+		            statusEscolhido.name(),
+		            funcionarioEscolhido.getNome()
+		        );
+
+		        // Gravar no DAO
+		        TarefasDAO dao = new TarefasDAO(t);
+		        dao.gravar();
+		        JOptionPane.showMessageDialog(tela, txtTitulo.getText() + " gravado com sucesso", "Sucesso !!!", JOptionPane.INFORMATION_MESSAGE);
+		        limparFormulario();
 			}
 		});
 
